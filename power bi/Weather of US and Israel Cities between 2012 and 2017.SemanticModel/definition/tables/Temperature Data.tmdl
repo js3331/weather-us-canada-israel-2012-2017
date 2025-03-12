@@ -1,0 +1,52 @@
+table 'Temperature Data'
+	lineageTag: f396bd57-7693-49fa-8778-917c01604d27
+
+	column Datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 427a4b6e-5c19-451c-aa9f-e5ef6dc1bd00
+		summarizeBy: none
+		sourceColumn: Datetime
+
+		variation Variation
+			isDefault
+			relationship: 4efa0d8b-0a2b-497b-a863-3d03d7334d7b
+			defaultHierarchy: LocalDateTable_9527c26c-8c8a-45bc-9301-f4f49a24abf9.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: b09e7f4f-e5c7-4c09-b25e-8d73951a1fd6
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Temperature
+		dataType: double
+		lineageTag: 13982fef-668c-47ec-befc-e93565ed7b66
+		summarizeBy: sum
+		sourceColumn: Temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Temperature Data' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\juhan\Downloads\temperature.csv"),[Delimiter=",", Columns=37, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"datetime", type datetime}, {"Vancouver", type number}, {"Portland", type number}, {"San Francisco", type number}, {"Seattle", type number}, {"Los Angeles", type number}, {"San Diego", type number}, {"Las Vegas", type number}, {"Phoenix", type number}, {"Albuquerque", type number}, {"Denver", type number}, {"San Antonio", type number}, {"Dallas", type number}, {"Houston", type number}, {"Kansas City", type number}, {"Minneapolis", type number}, {"Saint Louis", type number}, {"Chicago", type number}, {"Nashville", type number}, {"Indianapolis", type number}, {"Atlanta", type number}, {"Detroit", type number}, {"Jacksonville", type number}, {"Charlotte", type number}, {"Miami", type number}, {"Pittsburgh", type number}, {"Toronto", type number}, {"Philadelphia", type number}, {"New York", type number}, {"Montreal", type number}, {"Boston", type number}, {"Beersheba", type number}, {"Tel Aviv District", type number}, {"Eilat", type number}, {"Haifa", type number}, {"Nahariyya", type number}, {"Jerusalem", type number}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"datetime", "Datetime"}}),
+				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Renamed Columns", {"Datetime"}, "Attribute", "Value"),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "City"}, {"Value", "Temperature"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

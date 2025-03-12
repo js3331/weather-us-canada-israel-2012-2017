@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Weather of US and Israel Cities between 2012 and 2017"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "a6f7bbae-28cd-4898-bbd8-544dfd338399"
+  }
+}

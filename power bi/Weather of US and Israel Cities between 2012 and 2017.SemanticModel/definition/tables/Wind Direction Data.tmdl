@@ -1,0 +1,51 @@
+table 'Wind Direction Data'
+	lineageTag: dfda73e1-80a3-4cf2-a3f0-49476e44a15f
+
+	column Datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e1d31c94-23a9-4904-8d6b-bc8be0fb5e63
+		summarizeBy: none
+		sourceColumn: Datetime
+
+		variation Variation
+			isDefault
+			relationship: 3ced50f2-2116-4231-9338-ca117e9a94e0
+			defaultHierarchy: LocalDateTable_7f94ce7c-1d06-446d-9e1f-df216ecc0815.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: 849363a2-8f7c-40c7-9a1e-6d026fb9f1ae
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wind Direction'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5955a6aa-7ef1-4435-8ad4-e45dd6ed074f
+		summarizeBy: sum
+		sourceColumn: Wind Direction
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Wind Direction Data' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\juhan\Downloads\wind_direction.csv"),[Delimiter=",", Columns=37, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"datetime", type datetime}, {"Vancouver", Int64.Type}, {"Portland", Int64.Type}, {"San Francisco", Int64.Type}, {"Seattle", Int64.Type}, {"Los Angeles", Int64.Type}, {"San Diego", Int64.Type}, {"Las Vegas", Int64.Type}, {"Phoenix", Int64.Type}, {"Albuquerque", Int64.Type}, {"Denver", Int64.Type}, {"San Antonio", Int64.Type}, {"Dallas", Int64.Type}, {"Houston", Int64.Type}, {"Kansas City", Int64.Type}, {"Minneapolis", Int64.Type}, {"Saint Louis", Int64.Type}, {"Chicago", Int64.Type}, {"Nashville", Int64.Type}, {"Indianapolis", Int64.Type}, {"Atlanta", Int64.Type}, {"Detroit", Int64.Type}, {"Jacksonville", Int64.Type}, {"Charlotte", Int64.Type}, {"Miami", Int64.Type}, {"Pittsburgh", Int64.Type}, {"Toronto", Int64.Type}, {"Philadelphia", Int64.Type}, {"New York", Int64.Type}, {"Montreal", Int64.Type}, {"Boston", Int64.Type}, {"Beersheba", Int64.Type}, {"Tel Aviv District", Int64.Type}, {"Eilat", Int64.Type}, {"Haifa", Int64.Type}, {"Nahariyya", Int64.Type}, {"Jerusalem", Int64.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"datetime", "Datetime"}}),
+				    #"Unpivoted Only Selected Columns" = Table.Unpivot(#"Renamed Columns", {"Vancouver", "Portland", "San Francisco", "Seattle", "Los Angeles", "San Diego", "Las Vegas", "Phoenix", "Albuquerque", "Denver", "San Antonio", "Dallas", "Houston", "Kansas City", "Minneapolis", "Saint Louis", "Chicago", "Nashville", "Indianapolis", "Atlanta", "Detroit", "Jacksonville", "Charlotte", "Miami", "Pittsburgh", "Toronto", "Philadelphia", "New York", "Montreal", "Boston", "Beersheba", "Tel Aviv District", "Eilat", "Haifa", "Nahariyya", "Jerusalem"}, "Attribute", "Value"),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Unpivoted Only Selected Columns",{{"Attribute", "City"}, {"Value", "Wind Direction"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

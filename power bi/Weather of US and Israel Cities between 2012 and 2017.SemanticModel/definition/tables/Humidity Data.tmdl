@@ -1,0 +1,50 @@
+table 'Humidity Data'
+	lineageTag: 57f34311-eab5-4c94-8228-ad37c19aa6dd
+
+	column Datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: a661b349-643a-4f1b-a612-00c8b6baf48b
+		summarizeBy: none
+		sourceColumn: Datetime
+
+		variation Variation
+			isDefault
+			relationship: 7a088ea3-3749-4e5b-a43a-9869cc933fd5
+			defaultHierarchy: LocalDateTable_5517cc4d-d6eb-4d6c-9a05-f7a46b3d3fd7.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: f965cac1-15b8-4f1c-b8ce-437b011d66de
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Humidity
+		dataType: int64
+		formatString: 0
+		lineageTag: a683058b-b939-4376-b498-f2e181c34d47
+		summarizeBy: sum
+		sourceColumn: Humidity
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Humidity Data' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\juhan\Downloads\humidity.csv"),[Delimiter=",", Columns=37, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"datetime", type datetime}, {"Vancouver", Int64.Type}, {"Portland", Int64.Type}, {"San Francisco", Int64.Type}, {"Seattle", Int64.Type}, {"Los Angeles", Int64.Type}, {"San Diego", Int64.Type}, {"Las Vegas", Int64.Type}, {"Phoenix", Int64.Type}, {"Albuquerque", Int64.Type}, {"Denver", Int64.Type}, {"San Antonio", Int64.Type}, {"Dallas", Int64.Type}, {"Houston", Int64.Type}, {"Kansas City", Int64.Type}, {"Minneapolis", Int64.Type}, {"Saint Louis", Int64.Type}, {"Chicago", Int64.Type}, {"Nashville", Int64.Type}, {"Indianapolis", Int64.Type}, {"Atlanta", Int64.Type}, {"Detroit", Int64.Type}, {"Jacksonville", Int64.Type}, {"Charlotte", Int64.Type}, {"Miami", Int64.Type}, {"Pittsburgh", Int64.Type}, {"Toronto", Int64.Type}, {"Philadelphia", Int64.Type}, {"New York", Int64.Type}, {"Montreal", Int64.Type}, {"Boston", Int64.Type}, {"Beersheba", Int64.Type}, {"Tel Aviv District", Int64.Type}, {"Eilat", Int64.Type}, {"Haifa", Int64.Type}, {"Nahariyya", Int64.Type}, {"Jerusalem", Int64.Type}}),
+				    #"Unpivoted Only Selected Columns" = Table.Unpivot(#"Changed Type", {"Vancouver", "Portland", "San Francisco", "Seattle", "Los Angeles", "San Diego", "Las Vegas", "Phoenix", "Albuquerque", "Denver", "San Antonio", "Dallas", "Houston", "Kansas City", "Minneapolis", "Saint Louis", "Chicago", "Nashville", "Indianapolis", "Atlanta", "Detroit", "Jacksonville", "Charlotte", "Miami", "Pittsburgh", "Toronto", "Philadelphia", "New York", "Montreal", "Boston", "Beersheba", "Tel Aviv District", "Eilat", "Haifa", "Nahariyya", "Jerusalem"}, "Attribute", "Value"),
+				    #"Renamed Columns" = Table.RenameColumns(#"Unpivoted Only Selected Columns",{{"datetime", "Datetime"}, {"Attribute", "City"}, {"Value", "Humidity"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

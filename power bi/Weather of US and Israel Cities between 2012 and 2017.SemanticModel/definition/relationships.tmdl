@@ -1,0 +1,50 @@
+relationship 96a2e919-76ff-46fe-9ce8-850cd2149625
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Wind Speed Data'.Datetime
+	toColumn: LocalDateTable_12c1f67c-6376-4a64-910b-380506763c12.Date
+
+relationship 3ced50f2-2116-4231-9338-ca117e9a94e0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Wind Direction Data'.Datetime
+	toColumn: LocalDateTable_7f94ce7c-1d06-446d-9e1f-df216ecc0815.Date
+
+relationship 34d377f3-e540-4ae5-9ad4-9c2497f31946
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Weather Description Data'.Datetime
+	toColumn: LocalDateTable_e9be450a-f174-4e94-8da6-9cbeeba93b0b.Date
+
+relationship 4efa0d8b-0a2b-497b-a863-3d03d7334d7b
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Temperature Data'.Datetime
+	toColumn: LocalDateTable_9527c26c-8c8a-45bc-9301-f4f49a24abf9.Date
+
+relationship 7acb357d-4697-4d4f-8b83-7d89a49f8280
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Pressure Data'.Datetime
+	toColumn: LocalDateTable_09fd2460-5298-40e3-bfa8-bc7e24fd03d2.Date
+
+relationship 7a088ea3-3749-4e5b-a43a-9869cc933fd5
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Humidity Data'.Datetime
+	toColumn: LocalDateTable_5517cc4d-d6eb-4d6c-9a05-f7a46b3d3fd7.Date
+
+relationship AutoDetected_ac3c45b4-f59d-4e80-a6b6-cd98c58845fe
+	fromColumn: 'Wind Speed Data'.City
+	toColumn: 'City Lookup Table'.City
+
+relationship AutoDetected_e8514cab-c3d7-4f63-8374-5f3ef23bd5b2
+	fromColumn: 'Wind Direction Data'.City
+	toColumn: 'City Lookup Table'.City
+
+relationship AutoDetected_ba896798-1b1e-4697-b2e7-c43bfb18de6e
+	fromColumn: 'Weather Description Data'.City
+	toColumn: 'City Lookup Table'.City
+
+relationship AutoDetected_60cf2e11-be32-4781-b814-d73e690949b9
+	fromColumn: 'Temperature Data'.City
+	toColumn: 'City Lookup Table'.City
+
+relationship AutoDetected_167ef3c9-64cb-4fbf-bb54-e5ae5fd73b24
+	fromColumn: 'Humidity Data'.City
+	toColumn: 'City Lookup Table'.City
+

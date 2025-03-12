@@ -1,0 +1,33 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["Wind Speed Data","Wind Direction Data","Weather Description Data","Temperature Data","Pressure Data","Humidity Data","City Lookup Table"]
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table 'Wind Speed Data'
+ref table DateTableTemplate_75e2fd31-ad21-4c56-ab97-71fca7b30820
+ref table LocalDateTable_12c1f67c-6376-4a64-910b-380506763c12
+ref table 'Wind Direction Data'
+ref table LocalDateTable_7f94ce7c-1d06-446d-9e1f-df216ecc0815
+ref table 'Weather Description Data'
+ref table LocalDateTable_e9be450a-f174-4e94-8da6-9cbeeba93b0b
+ref table 'Temperature Data'
+ref table LocalDateTable_9527c26c-8c8a-45bc-9301-f4f49a24abf9
+ref table 'Pressure Data'
+ref table LocalDateTable_09fd2460-5298-40e3-bfa8-bc7e24fd03d2
+ref table 'Humidity Data'
+ref table LocalDateTable_5517cc4d-d6eb-4d6c-9a05-f7a46b3d3fd7
+ref table 'City Lookup Table'
+
+ref cultureInfo en-US
+
