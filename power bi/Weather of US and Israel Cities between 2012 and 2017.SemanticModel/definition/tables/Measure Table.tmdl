@@ -16,6 +16,14 @@ table 'Measure Table'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	measure 'Average Wind EW' = AVERAGE('Combined Data'[Wind Speed EW])
+		formatString: 0
+		lineageTag: 5cb9b00d-8e23-44fc-b19e-1cb5d05517e2
+
+	measure 'Average Wind NS' = AVERAGE('Combined Data'[Wind Speed NS])
+		formatString: 0
+		lineageTag: 74171f46-2620-454c-b0b6-c20132c61897
+
 	partition 'Measure Table' = m
 		mode: import
 		source =
