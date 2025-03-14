@@ -6,7 +6,7 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Wind Speed Data","Wind Direction Data","Weather Description Data","Temperature Data","Pressure Data","Humidity Data","City Lookup Table","Combined Data"]
+annotation PBI_QueryOrder = ["Wind Speed Data","Wind Direction Data","Weather Description Data","Temperature Data","Pressure Data","Humidity Data","City Lookup Table","Combined Data","Measure Table"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
@@ -30,6 +30,7 @@ ref table LocalDateTable_5517cc4d-d6eb-4d6c-9a05-f7a46b3d3fd7
 ref table 'City Lookup Table'
 ref table 'Combined Data'
 ref table LocalDateTable_87e7e33e-bda2-41b3-99b2-d00f68ccaf00
+ref table 'Measure Table'
 
 ref cultureInfo en-US
 

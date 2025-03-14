@@ -1,0 +1,30 @@
+table 'Measure Table'
+	lineageTag: e73c3d2f-d4bc-4751-b90e-af03f8d3eb89
+
+	measure 'Average Temperature' = AVERAGE('Combined Data'[Temperature])
+		lineageTag: 6ab22ed5-a93a-4d62-9756-0082564fd5c6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Humidity' = AVERAGE('Combined Data'[Humidity])
+		lineageTag: 3e2073a7-0998-43db-9796-b70feb999c00
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Average Pressure' = Average('Combined Data'[Pressure])
+		lineageTag: b9fc55c8-42a2-4baf-b2fa-53a6292a4caf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition 'Measure Table' = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+
