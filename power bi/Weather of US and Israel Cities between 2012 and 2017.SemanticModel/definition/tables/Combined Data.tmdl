@@ -1,0 +1,100 @@
+table 'Combined Data'
+	lineageTag: c7b14a14-a739-4703-b6d1-1547798858b8
+
+	column Datetime
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e9391920-30fd-4344-ad1a-5c4fd69cfa10
+		summarizeBy: none
+		sourceColumn: Datetime
+
+		variation Variation
+			isDefault
+			relationship: f703a52a-19c1-47c3-b07e-2dafa6de83a0
+			defaultHierarchy: LocalDateTable_87e7e33e-bda2-41b3-99b2-d00f68ccaf00.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: fb8bd50d-e4f8-41d6-ac9d-4ba46a89c51c
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wind Speed'
+		dataType: int64
+		formatString: 0
+		lineageTag: bbdf71d5-ea36-4115-a2a1-926ded7a7312
+		summarizeBy: sum
+		sourceColumn: Wind Speed
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wind Direction'
+		dataType: int64
+		formatString: 0
+		lineageTag: 4a9280e2-effb-401b-830d-5b5114d7b1c6
+		summarizeBy: sum
+		sourceColumn: Wind Direction
+
+		annotation SummarizationSetBy = Automatic
+
+	column Humidity
+		dataType: int64
+		formatString: 0
+		lineageTag: 5022a623-c169-4bbc-a56a-db5d463fcf9a
+		summarizeBy: sum
+		sourceColumn: Humidity
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pressure
+		dataType: int64
+		formatString: 0
+		lineageTag: 15d9edfa-45ed-4493-bc94-027ddb85c7ef
+		summarizeBy: sum
+		sourceColumn: Pressure
+
+		annotation SummarizationSetBy = Automatic
+
+	column Temperature
+		dataType: double
+		lineageTag: e98ce4c5-1066-40b5-806b-6a8439b8d97f
+		summarizeBy: sum
+		sourceColumn: Temperature
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Weather Description'
+		dataType: string
+		lineageTag: d2021e36-2150-41ba-b5c3-70720113f6cd
+		summarizeBy: none
+		sourceColumn: Weather Description
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Combined Data' = m
+		mode: import
+		source =
+				let
+				    Source = Table.NestedJoin(#"Wind Speed Data", {"Datetime", "City"}, #"Wind Direction Data", {"Datetime", "City"}, "Wind Direction Data", JoinKind.FullOuter),
+				    #"Expanded Wind Direction Data" = Table.ExpandTableColumn(Source, "Wind Direction Data", {"Wind Direction"}, {"Wind Direction"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Expanded Wind Direction Data", {"Datetime", "City"}, #"Humidity Data", {"Datetime", "City"}, "Humidity Data", JoinKind.FullOuter),
+				    #"Merged Queries1" = Table.NestedJoin(#"Merged Queries", {"Datetime", "City"}, #"Pressure Data", {"Datetime", "City"}, "Pressure Data", JoinKind.FullOuter),
+				    #"Merged Queries2" = Table.NestedJoin(#"Merged Queries1", {"Datetime", "City"}, #"Temperature Data", {"Datetime", "City"}, "Temperature Data", JoinKind.FullOuter),
+				    #"Merged Queries3" = Table.NestedJoin(#"Merged Queries2", {"Datetime", "City"}, #"Weather Description Data", {"Datetime", "City"}, "Weather Description Data", JoinKind.FullOuter),
+				    #"Expanded Humidity Data" = Table.ExpandTableColumn(#"Merged Queries3", "Humidity Data", {"Humidity"}, {"Humidity"}),
+				    #"Expanded Pressure Data" = Table.ExpandTableColumn(#"Expanded Humidity Data", "Pressure Data", {"Pressure"}, {"Pressure"}),
+				    #"Expanded Temperature Data" = Table.ExpandTableColumn(#"Expanded Pressure Data", "Temperature Data", {"Temperature"}, {"Temperature"}),
+				    #"Expanded Weather Description Data" = Table.ExpandTableColumn(#"Expanded Temperature Data", "Weather Description Data", {"Weather Description"}, {"Weather Description"})
+				in
+				    #"Expanded Weather Description Data"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

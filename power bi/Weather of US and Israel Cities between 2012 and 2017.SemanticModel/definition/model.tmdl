@@ -6,11 +6,11 @@ model Model
 		legacyRedirects
 		returnErrorValuesAsNull
 
-annotation PBI_QueryOrder = ["Wind Speed Data","Wind Direction Data","Weather Description Data","Temperature Data","Pressure Data","Humidity Data","City Lookup Table"]
+annotation PBI_QueryOrder = ["Wind Speed Data","Wind Direction Data","Weather Description Data","Temperature Data","Pressure Data","Humidity Data","City Lookup Table","Combined Data"]
 
 annotation __PBI_TimeIntelligenceEnabled = 1
 
-annotation PBIDesktopVersion = 2.140.1454.0 (25.02)+e2197f0c4ba3450e119e1aea750568d97991832a
+annotation PBIDesktopVersion = 2.140.1476.0 (25.02)+e8c6a85d1d09735c5c055c3244a60ff4076cd2cf
 
 annotation PBI_ProTooling = ["DevMode"]
 
@@ -28,6 +28,8 @@ ref table LocalDateTable_09fd2460-5298-40e3-bfa8-bc7e24fd03d2
 ref table 'Humidity Data'
 ref table LocalDateTable_5517cc4d-d6eb-4d6c-9a05-f7a46b3d3fd7
 ref table 'City Lookup Table'
+ref table 'Combined Data'
+ref table LocalDateTable_87e7e33e-bda2-41b3-99b2-d00f68ccaf00
 
 ref cultureInfo en-US
 

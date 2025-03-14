@@ -48,3 +48,12 @@ relationship AutoDetected_167ef3c9-64cb-4fbf-bb54-e5ae5fd73b24
 	fromColumn: 'Humidity Data'.City
 	toColumn: 'City Lookup Table'.City
 
+relationship f703a52a-19c1-47c3-b07e-2dafa6de83a0
+	joinOnDateBehavior: datePartOnly
+	fromColumn: 'Combined Data'.Datetime
+	toColumn: LocalDateTable_87e7e33e-bda2-41b3-99b2-d00f68ccaf00.Date
+
+relationship AutoDetected_13df29ae-a0df-4262-9332-55cd2075bd23
+	fromColumn: 'Combined Data'.City
+	toColumn: 'City Lookup Table'.City
+
