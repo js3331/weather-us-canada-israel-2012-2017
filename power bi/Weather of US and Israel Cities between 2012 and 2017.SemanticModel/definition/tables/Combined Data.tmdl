@@ -77,6 +77,22 @@ table 'Combined Data'
 
 		annotation SummarizationSetBy = Automatic
 
+	column 'Wind Speed EW'
+		dataType: string
+		lineageTag: ea4452bb-ec99-48b2-b0d9-4c18f69c41bd
+		summarizeBy: none
+		sourceColumn: Wind Speed EW
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Wind Speed NS'
+		dataType: string
+		lineageTag: a3e68238-5889-4e2f-ac6c-294f9176c6f0
+		summarizeBy: none
+		sourceColumn: Wind Speed NS
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Combined Data' = m
 		mode: import
 		source =
@@ -91,9 +107,13 @@ table 'Combined Data'
 				    #"Expanded Pressure Data" = Table.ExpandTableColumn(#"Expanded Humidity Data", "Pressure Data", {"Pressure"}, {"Pressure"}),
 				    #"Expanded Temperature Data" = Table.ExpandTableColumn(#"Expanded Pressure Data", "Temperature Data", {"Temperature"}, {"Temperature"}),
 				    #"Expanded Weather Description Data" = Table.ExpandTableColumn(#"Expanded Temperature Data", "Weather Description Data", {"Weather Description"}, {"Weather Description"}),
-				    #"Filtered Rows" = Table.SelectRows(#"Expanded Weather Description Data", each [Datetime] <> null and [Datetime] <> "")
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded Weather Description Data", each [Datetime] <> null and [Datetime] <> ""),
+				    #"Added Custom" = Table.AddColumn(#"Filtered Rows", "Wind Speed EW", each - [Wind Speed] * Number.Sin([Wind Direction] * Number.PI / 180)),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Custom",{"Datetime", "City", "Wind Speed", "Wind Direction", "Wind Speed EW", "Humidity", "Pressure", "Temperature", "Weather Description"}),
+				    #"Added Custom1" = Table.AddColumn(#"Reordered Columns", "Wind Speed NS", each - [Wind Speed] * Number.Cos([Wind Direction] * Number.PI / 180)),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Added Custom1",{"Datetime", "City", "Wind Speed", "Wind Direction", "Wind Speed EW", "Wind Speed NS", "Humidity", "Pressure", "Temperature", "Weather Description"})
 				in
-				    #"Filtered Rows"
+				    #"Reordered Columns1"
 
 	annotation PBI_NavigationStepName = Navigation
 
