@@ -33,6 +33,16 @@ table 'Temperature Data'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column 'Temperature (C)'
+		dataType: double
+		lineageTag: 183e9014-2df5-4182-9411-2ae24fdad2fb
+		summarizeBy: sum
+		sourceColumn: Temperature (C)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
 	partition 'Temperature Data' = m
 		mode: import
 		source =
@@ -42,9 +52,11 @@ table 'Temperature Data'
 				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"datetime", type datetime}, {"Vancouver", type number}, {"Portland", type number}, {"San Francisco", type number}, {"Seattle", type number}, {"Los Angeles", type number}, {"San Diego", type number}, {"Las Vegas", type number}, {"Phoenix", type number}, {"Albuquerque", type number}, {"Denver", type number}, {"San Antonio", type number}, {"Dallas", type number}, {"Houston", type number}, {"Kansas City", type number}, {"Minneapolis", type number}, {"Saint Louis", type number}, {"Chicago", type number}, {"Nashville", type number}, {"Indianapolis", type number}, {"Atlanta", type number}, {"Detroit", type number}, {"Jacksonville", type number}, {"Charlotte", type number}, {"Miami", type number}, {"Pittsburgh", type number}, {"Toronto", type number}, {"Philadelphia", type number}, {"New York", type number}, {"Montreal", type number}, {"Boston", type number}, {"Beersheba", type number}, {"Tel Aviv District", type number}, {"Eilat", type number}, {"Haifa", type number}, {"Nahariyya", type number}, {"Jerusalem", type number}}),
 				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"datetime", "Datetime"}}),
 				    #"Unpivoted Columns" = Table.UnpivotOtherColumns(#"Renamed Columns", {"Datetime"}, "Attribute", "Value"),
-				    #"Renamed Columns1" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "City"}, {"Value", "Temperature"}})
+				    #"Renamed Columns1" = Table.RenameColumns(#"Unpivoted Columns",{{"Attribute", "City"}, {"Value", "Temperature"}}),
+				    #"Inserted Subtraction" = Table.AddColumn(#"Renamed Columns1", "Subtraction", each [Temperature] - 273.15, type number),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Inserted Subtraction",{{"Subtraction", "Temperature (C)"}})
 				in
-				    #"Renamed Columns1"
+				    #"Renamed Columns2"
 
 	annotation PBI_ResultType = Table
 

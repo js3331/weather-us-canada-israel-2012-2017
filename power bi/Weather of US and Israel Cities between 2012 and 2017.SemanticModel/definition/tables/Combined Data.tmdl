@@ -90,9 +90,10 @@ table 'Combined Data'
 				    #"Expanded Humidity Data" = Table.ExpandTableColumn(#"Merged Queries3", "Humidity Data", {"Humidity"}, {"Humidity"}),
 				    #"Expanded Pressure Data" = Table.ExpandTableColumn(#"Expanded Humidity Data", "Pressure Data", {"Pressure"}, {"Pressure"}),
 				    #"Expanded Temperature Data" = Table.ExpandTableColumn(#"Expanded Pressure Data", "Temperature Data", {"Temperature"}, {"Temperature"}),
-				    #"Expanded Weather Description Data" = Table.ExpandTableColumn(#"Expanded Temperature Data", "Weather Description Data", {"Weather Description"}, {"Weather Description"})
+				    #"Expanded Weather Description Data" = Table.ExpandTableColumn(#"Expanded Temperature Data", "Weather Description Data", {"Weather Description"}, {"Weather Description"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Expanded Weather Description Data", each [Datetime] <> null and [Datetime] <> "")
 				in
-				    #"Expanded Weather Description Data"
+				    #"Filtered Rows"
 
 	annotation PBI_NavigationStepName = Navigation
 
