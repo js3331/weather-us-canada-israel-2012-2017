@@ -27,45 +27,45 @@ table 'Combined Data'
 		dataType: int64
 		formatString: 0
 		lineageTag: bbdf71d5-ea36-4115-a2a1-926ded7a7312
-		summarizeBy: sum
+		summarizeBy: average
 		sourceColumn: Wind Speed
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column 'Wind Direction'
 		dataType: int64
 		formatString: 0
 		lineageTag: 4a9280e2-effb-401b-830d-5b5114d7b1c6
-		summarizeBy: sum
+		summarizeBy: average
 		sourceColumn: Wind Direction
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column Humidity
 		dataType: int64
 		formatString: 0
 		lineageTag: 5022a623-c169-4bbc-a56a-db5d463fcf9a
-		summarizeBy: sum
+		summarizeBy: average
 		sourceColumn: Humidity
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column Pressure
 		dataType: int64
 		formatString: 0
 		lineageTag: 15d9edfa-45ed-4493-bc94-027ddb85c7ef
-		summarizeBy: sum
+		summarizeBy: average
 		sourceColumn: Pressure
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 	column Temperature
 		dataType: double
 		lineageTag: e98ce4c5-1066-40b5-806b-6a8439b8d97f
-		summarizeBy: sum
+		summarizeBy: average
 		sourceColumn: Temperature
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 

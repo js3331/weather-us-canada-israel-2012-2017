@@ -1,5 +1,5 @@
 {
-  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
+  "config": "{\"version\":\"5.59\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY24SU10\",\"version\":\"5.61\",\"type\":2}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"queryLimitOption\":6,\"exportDataMode\":1,\"useDefaultAggregateDisplayName\":true,\"useEnhancedTooltips\":true},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}]}}",
   "layoutOptimization": 0,
   "resourcePackages": [
     {
@@ -25,7 +25,26 @@
       "filters": "[]",
       "height": 720.00,
       "name": "938477f20219783b8e65",
-      "visualContainers": [],
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"9199e056c1a02b3caace\",\"layouts\":[{\"id\":0,\"position\":{\"x\":149.5716846178328,\"y\":382.8486239300491,\"z\":1,\"width\":909.7800633176436,\"height\":337.5654533576777,\"tabOrder\":1}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"City Lookup Table.Country Hierarchy.Country\",\"active\":true},{\"queryRef\":\"City Lookup Table.Country Hierarchy.City\",\"active\":true}],\"Values\":[{\"queryRef\":\"Avg(Combined Data.Humidity)\"},{\"queryRef\":\"Avg(Combined Data.Pressure)\"},{\"queryRef\":\"Avg(Combined Data.Temperature)\"},{\"queryRef\":\"Avg(Combined Data.Wind Direction)\"},{\"queryRef\":\"Avg(Combined Data.Wind Speed)\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"City Lookup Table\",\"Type\":0},{\"Name\":\"c1\",\"Entity\":\"Combined Data\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Hierarchy\":\"Country Hierarchy\"}},\"Level\":\"Country\"},\"Name\":\"City Lookup Table.Country Hierarchy.Country\",\"NativeReferenceName\":\"Country Hierarchy Country\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Hierarchy\":\"Country Hierarchy\"}},\"Level\":\"City\"},\"Name\":\"City Lookup Table.Country Hierarchy.City\",\"NativeReferenceName\":\"Country Hierarchy City\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c1\"}},\"Property\":\"Humidity\"}},\"Function\":1},\"Name\":\"Avg(Combined Data.Humidity)\",\"NativeReferenceName\":\"Average of Humidity\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c1\"}},\"Property\":\"Pressure\"}},\"Function\":1},\"Name\":\"Avg(Combined Data.Pressure)\",\"NativeReferenceName\":\"Average of Pressure\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c1\"}},\"Property\":\"Temperature\"}},\"Function\":1},\"Name\":\"Avg(Combined Data.Temperature)\",\"NativeReferenceName\":\"Average of Temperature\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c1\"}},\"Property\":\"Wind Direction\"}},\"Function\":1},\"Name\":\"Avg(Combined Data.Wind Direction)\",\"NativeReferenceName\":\"Average of Wind Direction\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c1\"}},\"Property\":\"Wind Speed\"}},\"Function\":1},\"Name\":\"Avg(Combined Data.Wind Speed)\",\"NativeReferenceName\":\"Average of Wind Speed\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"City Lookup Table.Country Hierarchy.Country\"],\"isPinned\":true},{\"queryRefs\":[\"City Lookup Table.Country Hierarchy.City\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null}}],\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 337.57,
+          "width": 909.78,
+          "x": 149.57,
+          "y": 382.85,
+          "z": 1.00
+        },
+        {
+          "config": "{\"name\":\"9fe57ac7676d9c71cbe9\",\"layouts\":[{\"id\":0,\"position\":{\"x\":957.8076684701587,\"y\":53.516474312802565,\"z\":0,\"width\":307.37667297609676,\"height\":268.95458885408465,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"map\",\"projections\":{\"Y\":[{\"queryRef\":\"City Lookup Table.Latitude\"}],\"X\":[{\"queryRef\":\"City Lookup Table.Longitude\"}],\"Series\":[{\"queryRef\":\"City Lookup Table.Country\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"c\",\"Entity\":\"City Lookup Table\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Latitude\"},\"Name\":\"City Lookup Table.Latitude\",\"NativeReferenceName\":\"Latitude\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Longitude\"},\"Name\":\"City Lookup Table.Longitude\",\"NativeReferenceName\":\"Longitude\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"c\"}},\"Property\":\"Country\"},\"Name\":\"City Lookup Table.Country\",\"NativeReferenceName\":\"Country\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 268.95,
+          "width": 307.38,
+          "x": 957.81,
+          "y": 53.52,
+          "z": 0.00
+        }
+      ],
       "width": 1280.00
     }
   ]

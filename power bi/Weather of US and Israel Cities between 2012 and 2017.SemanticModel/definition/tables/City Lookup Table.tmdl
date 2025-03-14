@@ -20,22 +20,33 @@ table 'City Lookup Table'
 	column Latitude
 		dataType: double
 		lineageTag: 7a2b0058-99cf-434a-9f3c-81df5d7c12c5
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Latitude
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column Longitude
 		dataType: double
 		lineageTag: 42da0b47-358a-44ed-b48e-dc8ed1d156bb
-		summarizeBy: sum
+		summarizeBy: none
 		sourceColumn: Longitude
 
-		annotation SummarizationSetBy = Automatic
+		annotation SummarizationSetBy = User
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	hierarchy 'Country Hierarchy'
+		lineageTag: 8d3e9ab1-0d2a-4c65-8352-5815c4e778ba
+
+		level Country
+			lineageTag: c7938232-8afc-4b73-b732-6cb4a092a7e1
+			column: Country
+
+		level City
+			lineageTag: 1bef1e44-5d02-4aec-acee-cf3fd5c3e6b1
+			column: City
 
 	partition 'City Lookup Table' = m
 		mode: import
