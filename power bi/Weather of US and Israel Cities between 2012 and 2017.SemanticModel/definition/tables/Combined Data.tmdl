@@ -97,6 +97,13 @@ table 'Combined Data'
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
+	column 'Temperature Fahrenheit' = ('Combined Data'[Temperature] - 273.15) * 9 / 5 + 32
+		formatString: 0.00
+		lineageTag: 4b0dec04-eb51-4a9a-a60d-53d6e14dac31
+		summarizeBy: average
+
+		annotation SummarizationSetBy = User
+
 	partition 'Combined Data' = m
 		mode: import
 		source =

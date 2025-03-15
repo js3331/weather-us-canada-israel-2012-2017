@@ -1,7 +1,7 @@
 table 'Measure Table'
 	lineageTag: e73c3d2f-d4bc-4751-b90e-af03f8d3eb89
 
-	measure 'Average Temperature' = AVERAGE('Combined Data'[Temperature])
+	measure 'Average Temperature' = AVERAGE('Combined Data'[Temperature Fahrenheit])
 		lineageTag: 6ab22ed5-a93a-4d62-9756-0082564fd5c6
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
@@ -17,12 +17,31 @@ table 'Measure Table'
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	measure 'Average Wind EW' = AVERAGE('Combined Data'[Wind Speed EW])
-		formatString: 0
+		formatString: 0.00
 		lineageTag: 5cb9b00d-8e23-44fc-b19e-1cb5d05517e2
 
 	measure 'Average Wind NS' = AVERAGE('Combined Data'[Wind Speed NS])
-		formatString: 0
+		formatString: 0.00
 		lineageTag: 74171f46-2620-454c-b0b6-c20132c61897
+
+	measure 'Average Wind Speed' = AVERAGE('Combined Data'[Wind Speed])
+		lineageTag: 209d0d58-ad0c-4c54-b270-ec1d4e87af4f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Max Temperature' = MAX('Combined Data'[Temperature Fahrenheit])
+		formatString: 0.0
+		lineageTag: ec1fecb9-1026-48cd-a38e-59e654f71474
+
+	measure 'Min Temperature' = min('Combined Data'[Temperature Fahrenheit])
+		formatString: 0.0
+		lineageTag: a9aa6c65-4edb-41f0-b95d-aefeda0da649
+
+	measure 'Max Wind Speed' = MAX('Combined Data'[Wind Speed])
+		formatString: 0
+		lineageTag: 9de0ee3b-c40d-4128-a3b0-4afabb0b0a5c
+
+		annotation PBI_FormatHint = {"isDecimal":true}
 
 	partition 'Measure Table' = m
 		mode: import
